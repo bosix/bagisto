@@ -1,15 +1,20 @@
 on: push
 
-steps:
-  - name: Checkout
-    uses: actions/checkout@v2
+jobs:
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
 
-  - name: Setup php
-    uses: shivammathur/setup-php@v1
-    with:
-      php-version: '7.3'
-      tools: codeception:3.1*
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  - name: Execute tests
-    run:
-      - echo "hello world"
+      - name: Setup php
+        uses: shivammathur/setup-php@v1
+        with:
+          php-version: '7.3'
+          tools: codeception:3.1*
+
+      - name: Execute tests
+        run:
+          - echo "hello world"
