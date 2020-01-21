@@ -5,7 +5,7 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     container:
-      image: ubuntu
+      image: php:7.3
 
     services:
       mysql:
@@ -21,14 +21,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install sudo
-        run: apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*
+      - name: Install apt packages
+        run: apt-get update && apt-get install -y mariadb-client git zip unzip wget libicu-dev && rm -rf /var/lib/apt/lists/*
 
       - name: Setup php
-        uses: shivammathur/setup-php@v1
-        with:
-          php-version: '7.3'
-          extensions: intl, curl, mbstring, openssl, pdo, pdo_mysql, tokenizer
+        run: |
+          docker-php-ext-install intl
+          docker-php-ext-install curl
+          docker-php-ext-install pdo_mysql
 
       - name: Composer install
         run: |
