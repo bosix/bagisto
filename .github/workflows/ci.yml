@@ -16,4 +16,7 @@ jobs:
           tools: codeception:3.1*
 
       - name: Execute tests
-        run: echo "hello world"
+        run: |
+          set -e
+          echo "hello world"
+          exit 1
