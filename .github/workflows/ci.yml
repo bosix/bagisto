@@ -22,13 +22,15 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install apt packages
-        run: apt-get update && apt-get install -y mariadb-client git zip unzip wget libicu-dev && rm -rf /var/lib/apt/lists/*
+        run: apt-get update && apt-get install -y curl mariadb-client git zip unzip wget libicu-dev && rm -rf /var/lib/apt/lists/*
 
       - name: Setup php
         run: |
           docker-php-ext-install intl
           docker-php-ext-install curl
           docker-php-ext-install pdo_mysql
+          docker-php-ext-install mbstring
+          docker-php-ext-install tokenizer
 
       - name: Composer install
         run: |
