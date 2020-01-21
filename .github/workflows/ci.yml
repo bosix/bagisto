@@ -30,8 +30,8 @@ jobs:
       - name: Set environment
         run: |
           set -e
-          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
-          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env
+          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env.testing
+          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env.testing
           printf "the complete .env.testing ...\n\n"
           cat .env.testing
 
