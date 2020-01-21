@@ -13,10 +13,15 @@ jobs:
         uses: shivammathur/setup-php@v1
         with:
           php-version: '7.3'
-          tools: codeception:3.1*
+
+      - name: Prepare laravel
+        run: |
+          set -e
+          composer global require hirak/prestissimo
+          composer install --no-interaction --ansi --no-progress --no-suggest --optimize-autoloader
+          php artisan migrate --env=testing
 
       - name: Execute tests
         run: |
           set -e
-          echo "hello world"
-          exit 1
+          vendor/bin/codecept run unit
