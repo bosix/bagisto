@@ -21,6 +21,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install sudo
+        run: apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*
+
       - name: Setup php
         uses: shivammathur/setup-php@v1
         with:
