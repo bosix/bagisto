@@ -1,10 +1,11 @@
 on: push
-
+name: CI
 jobs:
   tests:
     name: Run tests
     runs-on: ubuntu-latest
-    image: ubuntu
+    container:
+      image: ubuntu
 
     services:
       mysql:
@@ -14,6 +15,8 @@ jobs:
           MYSQL_DATABASE: bagisto_testing
           MYSQL_USER: bagisto
           MYSQL_PASSWORD: secret
+        ports:
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
 
     steps:
