@@ -42,11 +42,13 @@ jobs:
           composer install --no-interaction --ansi --no-progress --no-suggest --optimize-autoloader
 
       - name: Migrate database
-        run: |
-          set -e
-          php artisan migrate --env=testing
+        run: set -e && php artisan migrate --env=testing
 
-      - name: Execute tests
-        run: |
-          set -e
-          vendor/bin/codecept run unit
+      - name: Execute unit tests
+        run: set -e && vendor/bin/codecept run unit
+
+      - name: Execute functional tests
+        run: set -e && vendor/bin/codecept run functional
+
+      - name: Execute trigger tests
+        run: set -e && vendor/bin/codecept run trigger
